@@ -1,0 +1,32 @@
+
+.bordered {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.myContainer{
+    display: flex;
+    height:100vh!important;
+    margin-left: 10%;
+    width: 80%;
+    align-items: stretch;
+}
+
+.chats{
+    display: flex;
+    flex-direction: column!important;
+    order: 1;
+    height:100vh!important;
+
+}
+
+.userPreview{
+    width: 100%;
+    justify-content: center;
+}
+
+.chat {
+    order: 2;
+    width: 80%;
+    height:100vh!important;
+}
