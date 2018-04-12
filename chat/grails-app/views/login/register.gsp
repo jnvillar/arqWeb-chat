@@ -1,24 +1,49 @@
 <!doctype html>
 <html>
+
+<g:render template="/head" model='[title: "Registro"]'></g:render>
+
 <head>
-    <title>Login</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <asset:stylesheet src="login.css"/>
+
 </head>
 
+<g:render template="/navbar"></g:render>
+
 <body>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card-body">
+                        <h1 class="card-title">Registrarse</h1>
 
-<div>
-    <input id="name" type="text">
+                        <div class="form-group has-danger">
+                            <label class="form-control-label" for="name">Nombre</label>
+                            <input class="form-control" id="name" type="text">
+
+                            <div class="invalid-feedback" style="display: none"
+                                 id="userFeedback">Usuario no registrado</div>
+                        </div>
+
+                        <div class="form-group has-danger">
+                            <label class="form-control-label" for="pass">Contraseña</label>
+                            <input class="form-control" id="pass" type="password">
+
+                            <div class="invalid-feedback" style="display: none"
+                                 id="passFeedback">Contraseña incorrecta</div>
+                        </div>
+
+                        <div class="form-group" style="text-align: center">
+                            <button class="btn btn-primary" id="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div>
-    <input id="pass" type="password">
-</div>
-
-<div>
-    <button id="submit"> Submit</button>
-</div>
-
 </body>
 
 <script>

@@ -8,26 +8,24 @@
     <asset:javascript src="stompjs.js"/>
 </head>
 
-<body>
-
 <g:render template="/navbar"></g:render>
+
+<body>
 
 <div class="myContainer">
 
-    <div class="chats bordered">
-
+    <div class="user-chats" style="overflow-y:scroll ">
         <g:each var="user" in="${users}">
             <g:render template="/chat/userPreview" model="[user: user]"></g:render>
         </g:each>
-
     </div>
 
 
-    <div class="chat bordered">
-        <div id="chat"></div>
+    <div class="chat-container">
+        <div class="chat" id="chat"></div>
 
         <div>
-            <div class="form-group" style="float: left; width: 90%">
+            <div class="form-group user-input" style="float: left; width: 90%">
                 <textarea class="form-control" id="msg" rows="3"></textarea>
             </div>
 
@@ -36,7 +34,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 </body>

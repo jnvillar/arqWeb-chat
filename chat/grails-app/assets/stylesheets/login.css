@@ -1,0 +1,15 @@
+.myContainer{
+    display: flex;
+    flex-direction: column!important;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.item{
+    max-width: 50%;
+}
+
+.navbar {
+    margin-bottom: 5%;
+}
