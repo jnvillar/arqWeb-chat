@@ -1,6 +1,15 @@
 .bordered {
     border-style: solid;
     border-width: 1px;
+    border-color: black;
+}
+
+.navbar-colors{
+    background-color: #2c3e50!important;
+}
+
+.nav-link-color{
+    color: #f5f5f5!important;
 }
 
 .myContainer {
@@ -9,14 +18,12 @@
     right: 0;
     bottom: 0;
     position: absolute;
-    width: 80%;
     height: auto;
     display: flex;
     flex-direction: row !important;
-    margin-left: 10%;
 }
 
-.user-chats {
+.sidebar {
     width: 30%;
     display: flex;
     flex-direction: column !important;
@@ -24,16 +31,14 @@
     min-height: 0;
     flex-grow: 1;
     overflow: auto;
+    background-color: #2c3e50;
 }
 
 .user-card {
-    min-height: 60px;
+    min-height: 64px;
     display: flex;
     flex-direction: row !important;
     width: 100%;
-    border-style: solid;
-    border-color: gainsboro;
-    border-width: 1px;
     justify-content: center;
     justify-items: center;
 
@@ -41,43 +46,84 @@
 
 .user-image {
     display: flex;
+    justify-content: center;
     justify-items: center;
     align-items: center;
-    margin-left: 2px;
-    width: 30%;
+    width: 20%;
 }
 
 .user-card:hover {
-    background-color: #bce8f1 !important;
+    background-color: #32465a !important;
 }
 
 .user-name-container {
+    font-size: 16px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
+    width: 80%;
 }
 
 .user-name {
-    font-weight: bold;
+    color: #f5f5f5;
+    font-weight: 400;
+    margin-left: 2%;
+    margin-top: 10%;
+    display: flex;
+    align-items: start;
 }
 
 .chat-container {
     width: 70%;
     display: flex;
+    background-color: #e6eaea;
     flex-direction: column !important;
+    align-items: stretch;
 }
 
 .chat {
+    display: flex;
+    flex-direction: column !important;
+    height: 100%;
     width: 100%;
     overflow-y: scroll;
-    height: 80%;
 }
 
-.user-input {
+.chat-selected{
+    background-color: #32465a
+}
+
+.input-container {
     display: flex;
+    flex-direction: row !important;
+    min-height: 38px;
+    height: 38px;
+}
+
+.message-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    height: 20%;
+    justify-items: center;
+    width: 90%;
+    height: 100%;
+}
+
+.send-btn-container {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.message-input{
+    border-radius: 0px!important;
+}
+
+.send-btn{
+    width: 100%;
+    border-radius: 0px;
+    background-color: #2c3e50;
 }
 
 

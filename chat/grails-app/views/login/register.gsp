@@ -19,20 +19,17 @@
                     <div class="card-body">
                         <h1 class="card-title">Registrarse</h1>
 
-                        <div class="form-group has-danger">
+                        <div class="form-group">
                             <label class="form-control-label" for="name">Nombre</label>
                             <input class="form-control" id="name" type="text">
 
                             <div class="invalid-feedback" style="display: none"
-                                 id="userFeedback">Usuario no registrado</div>
+                                 id="userFeedback">Usuario ya registrado</div>
                         </div>
 
-                        <div class="form-group has-danger">
+                        <div class="form-group">
                             <label class="form-control-label" for="pass">Contraseña</label>
                             <input class="form-control" id="pass" type="password">
-
-                            <div class="invalid-feedback" style="display: none"
-                                 id="passFeedback">Contraseña incorrecta</div>
                         </div>
 
                         <div class="form-group" style="text-align: center">
@@ -49,6 +46,9 @@
 <script>
 
     $('#submit').click(function () {
+        $('#name').removeClass("is-invalid");
+        $('#userFeedback').hide();
+
         var name = $('#name').val();
         var password = $('#pass').val();
 
@@ -58,6 +58,9 @@
         }, function (response) {
             if (response.status == 200) {
                 window.location.replace("/")
+            } else {
+                $('#name').addClass("is-invalid");
+                $('#userFeedback').show();
             }
         });
     })

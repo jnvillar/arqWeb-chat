@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h1 class="card-title">Login</h1>
 
-                        <div class="form-group has-danger">
+                        <div class="form-group">
                             <label class="form-control-label" for="name">Nombre</label>
                             <input class="form-control" id="name" type="text">
 
@@ -27,7 +27,7 @@
                                  id="userFeedback">Usuario no registrado</div>
                         </div>
 
-                        <div class="form-group has-danger">
+                        <div class="form-group">
                             <label class="form-control-label" for="pass">Contraseña</label>
                             <input class="form-control" id="pass" type="password">
 

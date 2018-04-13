@@ -6,7 +6,7 @@ class User {
     String password
 
     static constraints = {
-
+        name(unique: true)
     }
 
 

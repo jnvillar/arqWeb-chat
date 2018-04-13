@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-colors">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="../">Chat!</a>
+        <a class="navbar-brand mx-auto nav-link-color" href="../">Chat!</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,16 +15,16 @@
         <ul class="navbar-nav ml-auto">
             <g:if test="${session?.user?.name}">
                 <li class="nav-item">
-                    <a class="nav-link">Bienvenido ${session?.user?.name}!</a>
+                    <a class="nav-link nav-link-color">Bienvenido ${session?.user?.name}!</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../logout">Deslogear</a>
+                    <a class="nav-link nav-link-color" href="../logout">Deslogear</a>
                 </li>
             </g:if>
             <g:else>
                 <li class="nav-item">
-                    <a class="nav-link" href="../register">Registrarse</a>
+                    <a class="nav-link nav-link-color" href="../register">Registrarse</a>
                 </li>
             </g:else>
         </ul>

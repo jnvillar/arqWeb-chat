@@ -14,7 +14,7 @@
 
 <div class="myContainer">
 
-    <div class="user-chats" style="overflow-y:scroll ">
+    <div class="sidebar" style="overflow-y:scroll ">
         <g:each var="user" in="${users}">
             <g:render template="/chat/userPreview" model="[user: user]"></g:render>
         </g:each>
@@ -24,14 +24,16 @@
     <div class="chat-container">
         <div class="chat" id="chat"></div>
 
-        <div>
-            <div class="form-group user-input" style="float: left; width: 90%">
-                <textarea class="form-control" id="msg" rows="3"></textarea>
+        <div class="input-container">
+
+            <div class="message-container form-group">
+                <textarea class="form-control message-input" id="msg" rows="1"></textarea>
             </div>
 
-            <div style="float: right; width: 10%">
-                <button class="btn btn-success" id="submit-message">Send</button>
+            <div class="send-btn-container">
+                <button class="btn btn-success send-btn" id="submit-message">Send</button>
             </div>
+
         </div>
     </div>
 </div>
@@ -42,7 +44,13 @@
 
     var currentChat;
 
-    function startChat(users) {
+    $(".user-card").click(function () {
+        $(".chat-selected").removeClass("chat-selected");
+        $(this).addClass("chat-selected");
+
+        var userId = $(this).data("user");
+        var users = ["${session.user.id}", userId];
+
         cleanChat();
 
         $.post("chat/start", {
@@ -53,8 +61,7 @@
                 conect();
                 loadMessages(response.chat.id)
             });
-
-    }
+    });
 
     function loadMessages(chatId) {
         $.post("chat/lastMessages",
@@ -67,8 +74,6 @@
                     return
                 }
 
-                console.log(response.messages);
-
                 $.each(response.messages, function (index, value) {
                     loadMessage(value, response.owner[index])
                 });
@@ -76,12 +81,20 @@
     }
 
     function loadMessage(msg, owner) {
-
         $("#chat").append('<p>' + msg.timestamp + " <b>" + owner + "</b> " + msg.message + '</p>');
+        scroll()
     }
 
     function cleanChat() {
         $("#chat").empty();
+    }
+
+    function cleanInput() {
+        $("#msg").val('')
+    }
+
+    function scroll() {
+        $('#chat').scrollTop($('#chat')[0].scrollHeight);
     }
 
     $("#submit-message").click(function () {
@@ -100,7 +113,11 @@
                     alert("Hubo un error")
                 }
             });
+
+
+        cleanInput();
     });
+
 
     function conect() {
         var socket = new SockJS("${createLink(uri: '/stomp')}");
@@ -112,7 +129,8 @@
                 loadMessage(msg, msg.user);
             });
         });
-    };
+    }
+    ;
 
 </script>
 </html>
