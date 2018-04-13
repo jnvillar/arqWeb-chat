@@ -81,7 +81,19 @@
     }
 
     function loadMessage(msg, owner) {
-        $("#chat").append('<p>' + msg.timestamp + " <b>" + owner + "</b> " + msg.message + '</p>');
+        var type = "received";
+        if (owner == "${session.user.name}") {
+            type = "send";
+        }
+
+        $("#chat").append(
+            '<div class="message-' + type + '">' +
+            '<div class="msg-name">' + owner + ' </div> ' +
+            '<div class="msg-container"> <p class="msg-msg">' +  msg.message + ' </p> </div> ' +
+            '<div class="msg-timestamp">' + msg.timestamp.substring(11, 16) + '</div>' +
+            '</div>'
+        )
+        ;
         scroll()
     }
 

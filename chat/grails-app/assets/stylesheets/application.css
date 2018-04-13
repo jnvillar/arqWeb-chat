@@ -4,12 +4,12 @@
     border-color: black;
 }
 
-.navbar-colors{
-    background-color: #2c3e50!important;
+.navbar-colors {
+    background-color: #2c3e50 !important;
 }
 
-.nav-link-color{
-    color: #f5f5f5!important;
+.nav-link-color {
+    color: #f5f5f5 !important;
 }
 
 .myContainer {
@@ -87,7 +87,7 @@
     overflow-y: scroll;
 }
 
-.chat-selected{
+.chat-selected {
     background-color: #32465a
 }
 
@@ -116,14 +116,73 @@
 
 }
 
-.message-input{
-    border-radius: 0px!important;
+.message-input {
+    border-radius: 0px !important;
 }
 
-.send-btn{
+.send-btn {
     width: 100%;
     border-radius: 0px;
     background-color: #2c3e50;
+}
+
+.message-send {
+    margin-right: 1%;
+    margin-left: 1%;
+    display: flex;
+    min-width: 40%;
+    max-width: 90%;
+    flex-direction: column;
+    border-radius: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    align-self: flex-end;
+    background-color: #f5f5f5;
+}
+
+.message-received {
+    min-width: 40%;
+    max-width: 90%;
+    margin-right: 1%;
+    margin-left: 1%;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    border-radius: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #2c3e50;
+    color: ghostwhite;
+}
+
+.msg-timestamp {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2%;
+}
+
+.msg-msg{
+    overflow-wrap: break-word;
+    max-width: 100%
+}
+
+.msg-container {
+    margin-right: 1%;
+    margin-left: 1%;
+    display: flex;
+}
+
+.msg-name {
+    margin-right: 1%;
+    margin-left: 1%;
+    text-transform:capitalize;
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+    justify-items: flex-start;
+    align-items: flex-start;
 }
 
 

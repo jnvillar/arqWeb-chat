@@ -10,6 +10,7 @@ class Message {
     static belongsTo = Chat
 
     static constraints = {
+        message(maxSize: 10000)
     }
 
     def toMap(){

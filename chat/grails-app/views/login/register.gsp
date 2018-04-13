@@ -30,6 +30,8 @@
                         <div class="form-group">
                             <label class="form-control-label" for="pass">Contraseña</label>
                             <input class="form-control" id="pass" type="password">
+                            <div class="invalid-feedback" style="display: none"
+                                 id="passFeedback">Contraseña vacía</div>
                         </div>
 
                         <div class="form-group" style="text-align: center">
@@ -49,8 +51,17 @@
         $('#name').removeClass("is-invalid");
         $('#userFeedback').hide();
 
+        $('#pass').removeClass("is-invalid");
+        $('#passFeedback').hide();
+
         var name = $('#name').val();
         var password = $('#pass').val();
+
+        if(password==""){
+            $('#pass').addClass("is-invalid");
+            $('#passFeedback').show();
+            return
+        }
 
         $.post("register", {
             name: name,
@@ -58,10 +69,10 @@
         }, function (response) {
             if (response.status == 200) {
                 window.location.replace("/")
-            } else {
-                $('#name').addClass("is-invalid");
-                $('#userFeedback').show();
             }
+        }).fail(function (response) {
+            $('#name').addClass("is-invalid");
+            $('#userFeedback').show();
         });
     })
 
