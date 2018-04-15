@@ -126,6 +126,8 @@ user-name-and-preview{
 }
 
 .msg-notification{
+    color: #c64141;
+    font-size: 14px;
     margin-top: 12%;
     margin-left: 6%;
     display: none;
