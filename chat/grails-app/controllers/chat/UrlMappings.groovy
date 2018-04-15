@@ -31,7 +31,7 @@ class UrlMappings {
         }
 
         "/chat/get"(controller: "chat") {
-            action = [POST: "getChatOfUser"]
+            action = [POST: "get"]
         }
 
         "/chat/lastMessages"(controller: "chat") {
@@ -41,6 +41,23 @@ class UrlMappings {
         "/chat/message"(controller: "chat") {
             action = [POST: "send"]
         }
+
+        "/user/contacts"(controller: "user"){
+            action = [GET: "getContacts"]
+        }
+
+        "/user/$id"(controller: "user"){
+            action = [GET: "get"]
+        }
+
+        "/user/add"(controller: "user"){
+            action = [POST: "addContact"]
+        }
+
+        "/user/chats"(controller: "user"){
+            action = [GET: "getChats"]
+        }
+
 
         "500"(view: '/error')
         "404"(view: '/notFound')

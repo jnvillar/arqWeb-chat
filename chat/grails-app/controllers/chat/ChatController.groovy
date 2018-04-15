@@ -1,18 +1,22 @@
 package chat
 
 import grails.converters.JSON
-import login.Logger
-import org.springframework.messaging.simp.SimpMessageSendingOperations
+
 
 class ChatController {
     UserService userService
     ChatService chatService
-    SimpMessageSendingOperations brokerMessagingTemplate
 
     def getChatsOfUser() {
         User user = userService.get(params.userId as Long)
         List<Chat> chats = chatService.getAllByUser(user)
         def response = [status: 200, chats: chats]
+        render response as JSON
+    }
+
+    def get(){
+        Chat chat = chatService.get(params.id as Long)
+        def response = [status: 200, chat: chat]
         render response as JSON
     }
 
@@ -37,11 +41,12 @@ class ChatController {
     def send() {
         Chat chat = chatService.getByTopic(params.topic as String)
         Message message = chatService.addMessage(chat, session.user as User, params.msg as String)
-        brokerMessagingTemplate.convertAndSend chat.topic, (message.toMap() as JSON).toString()
-        Logger.logMessage(message)
+
+        chatService.sendToChat(message)
+        chatService.sendToUsers(message)
+
         def response = [status: 200]
         render response as JSON
     }
-
 }
 

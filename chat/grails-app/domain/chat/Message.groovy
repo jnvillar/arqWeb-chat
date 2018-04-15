@@ -17,6 +17,7 @@ class Message {
         [
                 user: user.name,
                 chat: chat.id,
+                chatTopic: chat.topic,
                 timestamp: timestamp,
                 message:message,
         ]

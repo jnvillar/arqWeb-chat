@@ -6,7 +6,7 @@ class LoginValidator {
 
     static validate(session, params) {
         def response
-        def user = User.findByName(params.name)
+        def user = User.findByName(params.name.toLowerCase())
 
         switch (user) {
             case { it != null && it.password == params.password }:

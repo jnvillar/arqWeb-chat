@@ -5,7 +5,14 @@
     </button>
 
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto nav-link-color" href="../">Chat!</a>
+        <g:if test="${session?.user?.name}">
+            <a class="navbar-brand mx-auto nav-link-color" href="../">${session?.user?.name.length() > 30 ? session?.user?.name?.capitalize()[0..30] + "..." : session?.user?.name?.capitalize()}</a>
+        </g:if>
+
+        <g:else>
+            <a class="navbar-brand mx-auto nav-link-color" href="../">Chat!</a>
+        </g:else>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,10 +21,6 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <g:if test="${session?.user?.name}">
-                <li class="nav-item">
-                    <a class="nav-link nav-link-color">Bienvenido ${session?.user?.name}!</a>
-                </li>
-
                 <li class="nav-item">
                     <a class="nav-link nav-link-color" href="../logout">Deslogear</a>
                 </li>

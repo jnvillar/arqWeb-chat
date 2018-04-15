@@ -13,6 +13,11 @@ class LoginInterceptor {
             redirect(url: "/login")
             return false
         }
+
+        if(!session.user.isAttached()){
+            session.user.attach()
+        }
+
         return true
     }
 
