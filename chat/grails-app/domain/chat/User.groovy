@@ -2,7 +2,7 @@ package chat
 
 import groovy.transform.EqualsAndHashCode
 
-@EqualsAndHashCode(includes = 'id')
+@EqualsAndHashCode(includes = 'id,name')
 class User {
 
     String name
@@ -12,6 +12,7 @@ class User {
     static hasMany = [contacts: User]
 
     static constraints = {
+        contacts (lazy: false)
         name(unique: true)
         topic(nullable: true, unique: true)
     }

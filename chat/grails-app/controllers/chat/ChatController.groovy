@@ -14,7 +14,7 @@ class ChatController {
         render response as JSON
     }
 
-    def get(){
+    def get() {
         Chat chat = chatService.get(params.id as Long)
         def response = [status: 200, chat: chat]
         render response as JSON
@@ -39,8 +39,11 @@ class ChatController {
     }
 
     def send() {
+
+        println params.attachment
+
         Chat chat = chatService.getByTopic(params.topic as String)
-        Message message = chatService.addMessage(chat, session.user as User, params.msg as String)
+        Message message = chatService.addMessage(chat, session.user as User, params.msg as String, params.attachment as String)
 
         chatService.sendToChat(message)
         chatService.sendToUsers(message)

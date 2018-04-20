@@ -1,12 +1,19 @@
 package chat
 
+import attachment.AttachmentType
 import grails.gorm.transactions.Transactional
 
 @Transactional
 class MessageService {
 
-    def create(Chat chat, User user, String msg) {
-        Message message = new Message([chat:chat, message: msg, user: user])
+    def create(Chat chat, User user, String msg, String attachmentBytes) {
+        def attachment = null
+
+        if (attachmentBytes) {
+            attachment = new Attachment([bytes: attachmentBytes, extensions: "png", type: AttachmentType.IMAGE])
+        }
+
+        Message message = new Message([chat: chat, message: msg, user: user, attachment: attachment])
         message
     }
 }

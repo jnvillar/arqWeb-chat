@@ -14,16 +14,12 @@ class LoginInterceptor {
             return false
         }
 
-        if(!session.user.isAttached()){
-            session.user.attach()
-        }
-
         return true
     }
 
     boolean after() { true }
 
     void afterView() {
-        // no-op
+
     }
 }
