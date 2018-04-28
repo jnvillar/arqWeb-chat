@@ -22,6 +22,7 @@ class UserController {
     }
 
     def getContacts() {
+        session.user.attach()
         Set<User> users = userService.getContacts(session.user)
         render(template: "contactPreview", model: [users: users])
     }

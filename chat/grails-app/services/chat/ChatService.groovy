@@ -1,11 +1,9 @@
 package chat
 
 import grails.converters.JSON
-import grails.gorm.transactions.Transactional
 import login.Logger
 import org.springframework.messaging.simp.SimpMessageSendingOperations
 
-@Transactional
 class ChatService {
     MessageService messageService
     SimpMessageSendingOperations brokerMessagingTemplate
