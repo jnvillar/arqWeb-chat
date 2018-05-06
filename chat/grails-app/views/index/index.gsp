@@ -55,7 +55,13 @@
             <div class="attachment-btn-container">
                 <input type="file" class="attach-btn" id="attachment-button" name="file"
                        enctype="multipart/form-data"/>
-                <label for="file"><i class="fa fa-paperclip"></i></label>
+                <label for="file"><i class="fa fa-image"></i></label>
+            </div>
+
+            <div class="attachment-btn-container">
+                <input type="file" class="attach-btn" id="attachment-audio" name="file"
+                       enctype="multipart/form-data" accept=".mp3"/>
+                <label for="file"><i class="fa fa-music"></i></label>
             </div>
 
             <div class="message-container form-group">
@@ -260,17 +266,21 @@
             type = "send";
         }
 
-        var imgHtml = '';
+        var attachmentHtml = '';
 
         if (msg.attachment != null) {
-            imgHtml = '<img id="msg-item" src=' + msg.attachment + ' />'
+            if (msg.attachmentType == "IMAGE") {
+                attachmentHtml = '<img id="msg-item" src=' + msg.attachment + ' />'
+            } else {
+                attachmentHtml = '<audio controls style="min-width: 400px"><source src=' + msg.attachment + ' >  <audio>'
+            }
         }
 
         $("#chat").append(
             '<div class="message-' + type + '">' +
             '<div class="msg-name">' + owner + ' </div> ' +
             '<div class="msg-msg"> <p class="msg-msg">' + msg.message + '</p> </div> ' +
-            imgHtml +
+            attachmentHtml +
             '<div class="msg-timestamp">' + msg.timestamp.substring(11, 16) + '</div>' +
             '</div>'
         );
@@ -294,7 +304,7 @@
     }
 
 
-    function postMsg(file, msg) {
+    function postMsg(file, msg, type) {
         if (!msg && !file) return;
 
         var blob = null;
@@ -309,6 +319,7 @@
         fd.append("msg", msg);
         fd.append("userId", "${session.user.id}");
         fd.append("attachment", blob);
+        fd.append("attachmentType", type);
         fd.append("topic", currentChatTopic);
 
 
@@ -331,22 +342,33 @@
     }
 
     $("#submit-message").click(function () {
-        if (!currentChatTopic) return;
-        var msg = $("#msg").val();
+            if (!currentChatTopic) return;
+            var msg = $("#msg").val();
 
 
-        var fileList = document.getElementById("attachment-button").files;
-        var fileReader = new FileReader();
+            var fileList = document.getElementById("attachment-button").files;
+            var audioList = document.getElementById("attachment-audio").files;
 
-        if (fileReader && fileList && fileList.length) {
-            fileReader.readAsDataURL(fileList[0]);
-            fileReader.onload = function () {
-                postMsg(fileReader.result, msg)
+            var fileReader = new FileReader();
+
+            if (fileReader && fileList && fileList.length) {
+                fileReader.readAsDataURL(fileList[0]);
+                fileReader.onload = function () {
+                    console.log("Imagen cargada");
+                    postMsg(fileReader.result, msg, "${attachment.AttachmentType.IMAGE.name()}")
+                }
+            } else if (fileReader && audioList && audioList.length) {
+                fileReader.readAsDataURL(audioList[0]);
+                fileReader.onload = function () {
+                    console.log("Audio cargado");
+                    postMsg(fileReader.result, msg, "${attachment.AttachmentType.AUDIO.name()}")
+
+                };
+            } else {
+                postMsg(null, msg, null)
             }
-        } else {
-            postMsg(null, msg)
         }
-    });
+    );
 
 
     function conect(chatTopic) {
@@ -396,7 +418,7 @@
         $(".contacts").addClass("action-selected");
 
         $(".sidebar-cards").html("");
-        $.get("/user/contacts?sort="+sort,
+        $.get("/user/contacts?sort=" + sort,
             function (response) {
                 $(".sidebar-cards").html(response);
             });
@@ -429,9 +451,9 @@
     $(document).on('change', '.select-option', function () {
         var sort = $(this).val();
 
-        if(currentTab == "all-users"){
+        if (currentTab == "all-users") {
             loadAllUsers(sort)
-        }else{
+        } else {
             loadContacts(sort)
         }
 

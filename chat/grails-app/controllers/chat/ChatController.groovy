@@ -42,7 +42,7 @@ class ChatController {
 
     def send() {
         Chat chat = chatService.getByTopic(params.topic as String)
-        Message message = chatService.addMessage(chat, session.user as User, params.msg as String, params.attachment as String)
+        Message message = chatService.addMessage(chat, session.user as User, params.msg as String, params.attachment as String, params.attachmentType as String)
 
         chatService.sendToChat(message)
         chatService.sendToUsers(message)

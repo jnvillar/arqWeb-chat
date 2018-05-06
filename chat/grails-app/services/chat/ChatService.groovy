@@ -40,8 +40,8 @@ class ChatService {
         Chat.findByTopic(topic)
     }
 
-    def addMessage(Chat chat, User user, String msg, String attachment) {
-        Message message = messageService.create(chat, user, msg, attachment)
+    def addMessage(Chat chat, User user, String msg, String attachment, String attachmentType) {
+        Message message = messageService.create(chat, user, msg, attachment,  attachmentType)
         chat.addToMessages(message)
         chat.save(flush: true, failOnError: true)
         message
