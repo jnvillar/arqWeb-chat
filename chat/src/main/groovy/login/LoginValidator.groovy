@@ -3,7 +3,6 @@ package login
 import chat.User
 
 class LoginValidator {
-
     static validate(session, params) {
         def response
         def user = User.findByName(params.name.toLowerCase())

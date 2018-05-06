@@ -1,6 +1,9 @@
 package chat
 
+import user.City
+
 class UserService {
+    ChatService chatService
 
     def getAll() {
         User.findAll()
@@ -23,14 +26,18 @@ class UserService {
     }
 
     def getContacts(User user) {
-        user.contacts
+        user.contacts as List<User>
     }
 
     def create(Map params) {
         User user = new User([name    : params.name.toLowerCase(),
-                              password: params.password])
-        user.save(flush: true, failOnError: true)
+                              password: params.password,
+                              city    : City.valueOf(params.country as String),
+                              age     : params.age as Integer,
+                              nickName: params.nickName])
         user.topic = "/topic/${user.name}"
+        user.save(flush: true, failOnError: true)
+        chatService.addToPublicGroup(user)
         user
     }
 
@@ -40,5 +47,21 @@ class UserService {
         }
         user.save(flush: true, failOnError: true)
         user
+    }
+
+    def sortUsers(sort, List<User> users){
+        switch (sort) {
+            case { it == "name" }:
+                users.sort{it.name}
+                break
+            case { it == "city" }:
+                users.sort{it.city.name()}
+                break
+            case { it == "age" }:
+                users.sort{it.age}
+                break
+            default:
+                break
+        }
     }
 }

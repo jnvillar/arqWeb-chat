@@ -7,7 +7,11 @@ class UserController {
     ChatService chatService
 
     def getAll() {
-        userService.getAll()
+        def sort = params.sort
+        List<User> users = userService.getAll()
+        users.remove(session.user)
+        userService.sortUsers(sort, users)
+        render(template: "contactPreview", model: [users: users, sort:sort])
     }
 
     def get() {
@@ -23,8 +27,10 @@ class UserController {
 
     def getContacts() {
         session.user.attach()
-        Set<User> users = userService.getContacts(session.user)
-        render(template: "contactPreview", model: [users: users])
+        def sort = params.sort
+        List<User> users = userService.getContacts(session.user)
+        userService.sortUsers(sort, users)
+        render(template: "contactPreview", model: [users: users, sort: sort])
     }
 
     def addContact() {

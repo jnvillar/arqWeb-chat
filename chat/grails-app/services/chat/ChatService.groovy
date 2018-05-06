@@ -15,12 +15,23 @@ class ChatService {
 
     def createChat(List<User> users) {
         String chatName = "/topic/${users.name.join()}"
-        Chat chat = new Chat([topic: chatName, members: users as Set])
+        Chat chat = new Chat([topic: chatName, members: users as Set, type: ChatType.PRIVATE])
+        chat.save(flush: true, failOnError: true)
+    }
+
+    def addToGroup(User user, Chat chat){
+        chat.addToMembers(user)
+        chat.save(flush:true, failOnError: true)
+    }
+
+    def addToPublicGroup(User user){
+        Chat chat = Chat.findOrCreateByTypeAndTopic(ChatType.PUBLIC, "/topic/public")
+        chat.addToMembers(user)
         chat.save(flush: true, failOnError: true)
     }
 
     def getByUsers(List<User> users) {
-        Chat chat = Chat.all.find { it.members as Set == users as Set }
+        Chat chat = Chat.all.find { it.members as Set == users as Set && it.type == ChatType.PRIVATE }
         if (!chat) chat = createChat(users)
         chat
     }

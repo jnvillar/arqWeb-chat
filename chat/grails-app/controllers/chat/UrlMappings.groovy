@@ -58,6 +58,10 @@ class UrlMappings {
             action = [GET: "getChats"]
         }
 
+        "/users"(controller: "user"){
+            action = [GET: "getAll"]
+        }
+
 
         "500"(view: '/error')
         "404"(view: '/notFound')

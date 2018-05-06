@@ -21,6 +21,10 @@
                 <i class="fa fa-comments"></i>
             </div>
 
+            <div class="action-item all-users">
+                <i class="fa fa-globe"></i>
+            </div>
+
             <div class="action-item contacts">
                 <i class="fa fa-address-book"></i>
             </div>
@@ -69,10 +73,10 @@
 </body>
 
 <script>
-
     var currentChatTopic = "none";
     var userTopic = "${session.user.topic}";
     var currentChatSuscription;
+    var currentTab
 
     var Base64 = {
         _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
@@ -245,7 +249,7 @@
                 }
 
                 $.each(response.messages, function (index, value) {
-                    loadMessage(value, response.owner[index])
+                    loadMessage(value, value.user)
                 });
             });
     }
@@ -363,12 +367,23 @@
         });
     }
 
+    function loadAllUsers(sort) {
+        $(".action-item").removeClass("action-selected");
+        $(".all-users").addClass("action-selected");
+        $(".sidebar-cards").html("");
+
+        $.get("/users?sort=" + sort,
+            function (response) {
+                $(".sidebar-cards").html(response);
+            }
+        )
+    }
 
     function loadChats(chat) {
         $(".action-item").removeClass("action-selected");
         $(".chats").addClass("action-selected");
-
         $(".sidebar-cards").html("");
+
         $.get("/user/chats",
             function (response) {
                 $(".sidebar-cards").html(response);
@@ -376,12 +391,12 @@
             });
     }
 
-    function loadContacts() {
+    function loadContacts(sort) {
         $(".action-item").removeClass("action-selected");
         $(".contacts").addClass("action-selected");
 
         $(".sidebar-cards").html("");
-        $.get("/user/contacts",
+        $.get("/user/contacts?sort="+sort,
             function (response) {
                 $(".sidebar-cards").html(response);
             });
@@ -391,18 +406,35 @@
         loadChats(-1);
     });
 
+    $(".all-users").click(function () {
+        currentTab = "all-users";
+        loadAllUsers(null);
+    });
+
     $(".contacts").click(function () {
-        loadContacts()
+        currentTab = "contacts";
+        loadContacts(null);
     });
 
     $(".add").click(function () {
         $(".action-item").removeClass("action-selected");
         $(".add").addClass("action-selected");
-    })
+    });
 
     $(".groups").click(function () {
         $(".action-item").removeClass("action-selected");
         $(".groups").addClass("action-selected");
+    });
+
+    $(document).on('change', '.select-option', function () {
+        var sort = $(this).val();
+
+        if(currentTab == "all-users"){
+            loadAllUsers(sort)
+        }else{
+            loadContacts(sort)
+        }
+
     })
 
 </script>

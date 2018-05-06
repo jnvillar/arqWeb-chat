@@ -32,16 +32,15 @@ class ChatController {
 
         def response = [
                 status  : 200,
-                messages: chat.messages.size() < 50 ? chat.messages : chat.messages[-50..-1],
-                owner   : chat.messages.size() < 50 ? chat.messages.user.name : chat.messages[-50..-1].user.name,
+
+                messages: chat.messages.size() < 50 ?
+                        chat.messages.collect { it.toMap() } :
+                        chat.messages[-50..-1].collect { it.toMap() },
         ]
         render response as JSON
     }
 
     def send() {
-
-        println params.attachment
-
         Chat chat = chatService.getByTopic(params.topic as String)
         Message message = chatService.addMessage(chat, session.user as User, params.msg as String, params.attachment as String)
 

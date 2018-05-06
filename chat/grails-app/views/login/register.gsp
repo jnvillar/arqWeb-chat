@@ -28,6 +28,27 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="form-control-label" for="nickName">Alias</label>
+                            <input class="form-control" id="nickName" type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="age">Edad</label>
+                            <input class="form-control" id="age" type="number" min="0" max="120">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Ciudad</label>
+                            <select class="form-control" id="country">
+                               <g:each var="country" in="${user.City.values()}">
+                                   <option value="${country}">${country.name().replace("_"," ").toLowerCase().capitalize()}</option>
+                               </g:each>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-group">
                             <label class="form-control-label" for="pass">Contraseña</label>
                             <input class="form-control" id="pass" type="password">
                             <div class="invalid-feedback" style="display: none"
@@ -55,7 +76,10 @@
         $('#passFeedback').hide();
 
         var name = $('#name').val();
+        var age = $('#age').val();
+        var nickName = $('#nickName').val();
         var password = $('#pass').val();
+        var country = $( "#country option:selected" ).val()
 
         if(password==""){
             $('#pass').addClass("is-invalid");
@@ -65,7 +89,10 @@
 
         $.post("register", {
             name: name,
-            password: password
+            password: password,
+            country: country,
+            nickName: nickName,
+            age: age
         }, function (response) {
             if (response.status == 200) {
                 window.location.replace("/")

@@ -38,6 +38,28 @@ textarea {
     background-color: #2c3e50;
 }
 
+.sort{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.sort-title{
+    justify-content: center;
+    font-size: 16px;
+    color: #f5f5f5;
+    font-weight: 400;
+    display: flex;
+    width: 20%;
+}
+
+.sort-type{
+    display: flex;
+    width: 80%;
+}
+
 .sidebar-cards {
     width: 100%;
     display: flex;
@@ -127,6 +149,26 @@ user-name-and-preview {
     align-items: center;
 }
 
+.user-city {
+    margin-left: 1%;
+    font-size: 16px;
+    color: #f5f5f5;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-age {
+    margin-left: 1%;
+    font-size: 16px;
+    color: #f5f5f5;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .msg-notification {
     color: #c64141;
     font-size: 14px;
@@ -172,23 +214,28 @@ user-name-and-preview {
     height: 38px;
 }
 
+
 .attachment-btn-container {
     display: flex;
     width: 5%;
+    position: relative;
 }
 
 .attach-btn {
+    display: flex;
+    width: 100%;
+    height: 100%;
     background-color: #2c3e50;
     color: white;
-    width: 5%;
-    height: 5%;
     opacity: 0;
     overflow: hidden;
     position: absolute;
     z-index: 2;
+    cursor: pointer;
 }
 
 .attach-btn + label {
+    position: absolute;
     cursor: pointer;
     display: flex;
     justify-items: center;
@@ -204,7 +251,6 @@ user-name-and-preview {
 .attach-btn + label:hover {
     background-color: #32465a;
 }
-
 
 .message-container {
     display: flex;
