@@ -141,32 +141,35 @@ user-name-and-preview {
 }
 
 .user-name {
+    width: 50%;
     font-size: 16px;
     color: #f5f5f5;
     font-weight: 400;
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.user-info{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    justify-self: flex-end;
 }
 
 .user-city {
     margin-left: 1%;
-    font-size: 16px;
+    font-size: 14px;
     color: #f5f5f5;
     font-weight: 400;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .user-age {
     margin-left: 1%;
-    font-size: 16px;
+    font-size: 14px;
     color: #f5f5f5;
     font-weight: 400;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .msg-notification {
@@ -338,6 +341,5 @@ user-name-and-preview {
     margin-left: 1%;
     text-transform: capitalize;
     display: flex;
-
 }
 
