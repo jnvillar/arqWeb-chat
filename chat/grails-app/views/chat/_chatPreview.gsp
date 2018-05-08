@@ -3,10 +3,10 @@
     <div class="user-card chat-card" data-chat="${chat.id}">
         <div class="user-image">
             <g:if test="${chat.members.size() == 2 && chat.type == chat.ChatType.PRIVATE}">
-                <i class="fa fa-user"></i>
+                <i class="fas fa-user"></i>
             </g:if>
             <g:else>
-                <i class="fa fa-users"></i>
+                <i class="fas fa-users"></i>
             </g:else>
         </div>
 
@@ -28,7 +28,7 @@
                 </g:else>
 
                 <div class="msg-notification" id="notification-${chat.id}">
-                    <i class="fa fa-bell"></i>
+                    <i class="fas fa-bell"></i>
                 </div>
             </div>
 
