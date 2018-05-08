@@ -18,23 +18,23 @@
 
         <div class="action-bar">
             <div class="action-item chats">
-                <i class="fas fa-comments"></i>
+                <i class="fa fa-comments"></i>
             </div>
 
             <div class="action-item all-users">
-                <i class="fas fa-globe"></i>
+                <i class="fa fa-globe"></i>
             </div>
 
             <div class="action-item contacts">
-                <i class="fas fa-address-book"></i>
+                <i class="fa fa-address-book"></i>
             </div>
 
             <div class="action-item groups" data-toggle="modal" data-target="#add-group">
-                <i class="fas fa-users"></i>
+                <i class="fa fa-users"></i>
             </div>
 
             <div class="action-item add" data-toggle="modal" data-target="#add-contact">
-                <i class="fas fa-user-plus"></i>
+                <i class="fa fa-user-plus"></i>
             </div>
 
         </div>
@@ -55,13 +55,13 @@
             <div class="attachment-btn-container">
                 <input type="file" class="attach-btn" id="attachment-button" name="file"
                        enctype="multipart/form-data"/>
-                <label for="file"><i class="fas fa-image"></i></label>
+                <label for="file"><i class="fa fa-image"></i></label>
             </div>
 
             <div class="attachment-btn-container">
                 <input type="file" class="attach-btn" id="attachment-audio" name="file"
                        enctype="multipart/form-data" accept=".mp3"/>
-                <label for="file"><i class="fas fa-music"></i></label>
+                <label for="file"><i class="fa fa-music"></i></label>
             </div>
 
             <div class="message-container form-group">
@@ -276,10 +276,16 @@
             }
         }
 
+        var message = msg.message;
+
+        if(!message){
+            message = "";
+        }
+
         $("#chat").append(
             '<div class="message-' + type + '">' +
             '<div class="msg-name">' + owner + ' </div> ' +
-            '<div class="msg-msg"> <p class="msg-msg">' + msg.message + '</p> </div> ' +
+            '<div class="msg-msg"> <p class="msg-msg">' + message + '</p> </div> ' +
             attachmentHtml +
             '<div class="msg-timestamp">' + msg.timestamp.substring(11, 16) + '</div>' +
             '</div>'
