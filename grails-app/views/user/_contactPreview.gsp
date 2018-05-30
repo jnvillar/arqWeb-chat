@@ -14,7 +14,7 @@
     <div class="user-card contact-card" data-user="${user.name}">
 
         <div class="user-image">
-            <i class="fas fa-user"></i>
+            <i class="fa fa-user"></i>
         </div>
 
         <div class="user-name-and-preview">
@@ -31,11 +31,4 @@
 
     </div>
 </g:each>
-
-
-
-<script>
-    $('.selectpicker').selectpicker();
-</script>
-
 
