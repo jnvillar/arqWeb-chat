@@ -98,22 +98,27 @@ dataSource:
     pooled: true
     jmxExport: true
     driverClassName: com.mysql.jdbc.Driver
-    username: root
-    password: root
+    username: hlr3n774t5lm7fy5
+    password: nr538o6q1w4opube
 
 environments:
     development:
         dataSource:
             dbCreate: update
-            url: 'jdbc:mysql://localhost:3306/chat'
+            url: 'jdbc:mysql://k9xdebw4k3zynl4u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zj2wti0swrdwg6vj'
+            properties:
+                minIdle: 1
+                maxIdle: 5
     test:
         dataSource:
+            username: root
+            password: root
             dbCreate: update
             url: 'jdbc:mysql://localhost:3306/chat'
     production:
         dataSource:
             dbCreate: none
-            url: 'jdbc:mysql://localhost:3306/chat'
+            url: 'jdbc:mysql://k9xdebw4k3zynl4u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zj2wti0swrdwg6vj'
             properties:
                 jmxEnabled: true
                 initialSize: 5

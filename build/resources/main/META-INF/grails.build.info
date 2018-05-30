@@ -1,0 +1,6 @@
+#Wed, 30 May 2018 17:11:51 -0300
+
+info.app.version=0.1
+info.app.name=arqWeb-chat
+grails.env=development
+info.app.grailsVersion=3.3.2
