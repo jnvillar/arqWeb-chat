@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="grails-wrapper">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/grails-wrapper.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
