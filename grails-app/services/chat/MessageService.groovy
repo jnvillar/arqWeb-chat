@@ -7,7 +7,7 @@ class MessageService {
     def create(Chat chat, User user, String msg, String attachmentBytes, String attachmentType) {
         def attachment = null
 
-        if (attachmentBytes != "null") {
+        if (attachmentBytes != "null" && attachmentBytes != null) {
             attachment = new Attachment([bytes: attachmentBytes, extensions: "png", type: AttachmentType.valueOf(attachmentType) ])
         }
 

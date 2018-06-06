@@ -4,7 +4,11 @@ package chat
 class LoginInterceptor {
 
     LoginInterceptor() {
-        match(controller: "user|chat|index", action: "*")
+        matchAll()
+                .excludes(controller: "login", action: "*")
+                .excludes(controller: "chat", action: "publicIntegration|privateIntegration")
+                .excludes(controller: "user", action: "list")
+
     }
 
 

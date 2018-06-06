@@ -2,6 +2,7 @@ package chat
 
 import groovy.transform.EqualsAndHashCode
 import user.City
+import user.UserType
 
 @EqualsAndHashCode(includes = 'id,name')
 class User {
@@ -12,6 +13,7 @@ class User {
     City city
     int age
     String nickName
+    UserType type
 
     static hasMany = [contacts: User]
 

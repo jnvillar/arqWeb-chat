@@ -62,6 +62,18 @@ class UrlMappings {
             action = [GET: "getAll"]
         }
 
+        "/integration/public"(controller:"chat"){
+            action = [POST: "publicIntegration"]
+        }
+
+        "/integration/private"(controller:"chat"){
+            action = [POST: "privateIntegration"]
+        }
+
+        "/show/users"(controller: "user"){
+            action = [GET: "list"]
+        }
+
 
         "500"(view: '/error')
         "404"(view: '/notFound')

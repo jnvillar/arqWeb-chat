@@ -1,12 +1,13 @@
 package chat
 
 import user.City
+import user.UserType
 
 class UserService {
     ChatService chatService
 
     def getAll() {
-        User.findAll()
+        User.findAllByType(UserType.LOCAL)
     }
 
     def get(Long id) {
@@ -15,6 +16,22 @@ class UserService {
 
     def getByName(String name) {
         User.findByName(name.toLowerCase())
+    }
+
+    def getIntegrationUser(String name){
+        User user  = User.findByNameAndType(name.toLowerCase(), UserType.INTEGRATION)
+        if(!user) user = createIntegrationUser(name)
+        user
+    }
+
+    def createIntegrationUser(String name){
+        User user = new User([name    : name.toLowerCase(),
+                              password: "a",
+                              city    : City.BUENOS_AIRES,
+                              age     : 10,
+                              nickName: name.toLowerCase(),
+                              type    : UserType.INTEGRATION])
+        user.save(flush: true, failOnError: true)
     }
 
     def getMultiple(userNames) {
@@ -34,7 +51,8 @@ class UserService {
                               password: params.password,
                               city    : City.valueOf(params.country as String),
                               age     : params.age as Integer,
-                              nickName: params.nickName])
+                              nickName: params.nickName,
+                              type    : UserType.LOCAL])
         user.topic = "/topic/${user.name}"
         user.save(flush: true, failOnError: true)
         chatService.addToPublicGroup(user)
@@ -49,16 +67,16 @@ class UserService {
         user
     }
 
-    def sortUsers(sort, List<User> users){
+    def sortUsers(sort, List<User> users) {
         switch (sort) {
             case { it == "name" }:
-                users.sort{it.name}
+                users.sort { it.name }
                 break
             case { it == "city" }:
-                users.sort{it.city.name()}
+                users.sort { it.city.name() }
                 break
             case { it == "age" }:
-                users.sort{it.age}
+                users.sort { it.age }
                 break
             default:
                 break

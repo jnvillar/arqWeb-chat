@@ -13,6 +13,7 @@ class Message {
     static constraints = {
         message(maxSize: 10000, nullable: true)
         attachment(nullable: true)
+        user(nullable: true)
     }
 
     def toMap() {

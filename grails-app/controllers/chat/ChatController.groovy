@@ -1,6 +1,7 @@
 package chat
 
 import grails.converters.JSON
+import user.UserType
 
 
 class ChatController {
@@ -50,5 +51,36 @@ class ChatController {
         def response = [status: 200]
         render response as JSON
     }
+
+    def publicIntegration(){
+        def data = request.JSON
+        if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
+
+        User user = userService.getIntegrationUser((data.from as String) + " (" + (data.sourceApp as String) + ")")
+        Chat chat = chatService.getPublicGroup()
+        Message message = chatService.addMessage(chat, user, data.msg as String, "null" , data.attachmentType as String)
+
+        chatService.sendToChat(message)
+        chatService.sendToUsers(message)
+        def response = [status: 200]
+        render response as JSON
+    }
+
+    def privateIntegration(){
+        def data = request.JSON
+        if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
+
+        User userFrom = userService.getIntegrationUser((data.from as String) + " (" + (data.sourceApp as String) + ")")
+        User userTo = User.findByNameAndType(data.to as String, UserType.LOCAL)
+        Chat chat = chatService.getByUsers([userFrom, userTo])
+        Message message = chatService.addMessage(chat, userFrom, data.msg as String, data.attachment as String, data.attachmentType as String)
+
+        chatService.sendToChat(message)
+        chatService.sendToUsers(message)
+
+        def response = [status: 200]
+        render response as JSON
+    }
+
 }
 

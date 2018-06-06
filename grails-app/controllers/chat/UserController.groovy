@@ -14,6 +14,12 @@ class UserController {
         render(template: "contactPreview", model: [users: users, sort:sort])
     }
 
+    def list(){
+        List<User> users = userService.getAll()
+        users = users.collect{return [id:it.id, name:it.name]}
+        render users as JSON
+    }
+
     def get() {
         User user = userService.get(params.id as Long)
         def response = [status: 200, user: user]

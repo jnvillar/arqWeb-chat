@@ -30,6 +30,7 @@ repositories {
 }
 
 dependencies {
+    compile 'org.grails:grails-datastore-rest-client'
     compile "com.github.jsimone:webapp-runner:8.5.11.3"
     compile 'org.grails.plugins:grails-spring-websocket:2.3.0'
     compile "org.springframework.boot:spring-boot-starter-logging"
