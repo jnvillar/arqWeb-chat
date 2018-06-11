@@ -75,7 +75,7 @@ class ChatService {
 
         if (message.chat.type == ChatType.PRIVATE) {
             externalUsers.each { User user ->
-                apiClient.post("url translator private", [
+                apiClient.post("https://awebchat-integration.herokuapp.com/send", [
                         "from"      : message.user.name,
                         "msg"       : message.message,
                         "to"        : user.name,
@@ -87,7 +87,7 @@ class ChatService {
             }
         } else {
             externalUsers.each { User user ->
-                apiClient.post("url translator publica", [
+                apiClient.post("https://awebchat-integration.herokuapp.com/send", [
                         "from"      : message.user.name,
                         "msg"       : message.message,
                         "to"        : user.name,
