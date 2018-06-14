@@ -15,6 +15,9 @@ class User {
     String nickName
     UserType type
 
+    String integrationApp
+    String integrationId
+
     static hasMany = [contacts: User]
 
     static constraints = {
@@ -22,5 +25,7 @@ class User {
         name(unique: true)
         topic(nullable: true, unique: true)
         city(nullable: false)
+        integrationApp(nullable: true)
+        integrationId(nullable: true)
     }
 }

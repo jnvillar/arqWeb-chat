@@ -17,7 +17,7 @@
                 </g:if>
                 <g:else>
                     <g:if test="${chat.members.size() == 2}">
-                        <div class="user-name">${chat.members.name.join().replace(session.user.name, "").capitalize()}
+                        <div class="user-name">${chat.members.name.join().replaceFirst(session.user.name, "").capitalize()}
                         </div>
                     </g:if>
                     <g:else>

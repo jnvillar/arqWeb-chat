@@ -28,6 +28,16 @@ class ChatController {
         render response as JSON
     }
 
+    def createIntegration(){
+        User user = User.findByName(params.user as String)
+        User userIntegration = userService.getIntegrationUser([from:[name:params.userName, id:params.userId], sourceApp:params.userChat])
+
+        List<User> users = [user,userIntegration]
+        Chat chat = chatService.getByUsers(users)
+        def response = [status: 200, chat: chat]
+        render response as JSON
+    }
+
     def lastMessages() {
         Chat chat = chatService.get(params.chatId as Long)
 
@@ -56,7 +66,7 @@ class ChatController {
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
-        User user = userService.getIntegrationUser((data.from as String) + " (" + (data.sourceApp as String) + ")")
+        User user = userService.getIntegrationUser(params)
         Chat chat = chatService.getPublicGroup()
         Message message = chatService.addMessage(chat, user, data.msg as String, "null" , data.attachmentType as String)
 
@@ -70,7 +80,7 @@ class ChatController {
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
-        User userFrom = userService.getIntegrationUser((data.from as String) + " (" + (data.sourceApp as String) + ")")
+        User userFrom = userService.getIntegrationUser(params)
         User userTo = User.findByNameAndType(data.to as String, UserType.LOCAL)
         Chat chat = chatService.getByUsers([userFrom, userTo])
         Message message = chatService.addMessage(chat, userFrom, data.msg as String, data.attachment as String, data.attachmentType as String)

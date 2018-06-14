@@ -30,6 +30,10 @@ class UrlMappings {
             action = [POST: "create"]
         }
 
+        "/chat/integration/start"(controller: "chat") {
+            action = [POST: "createIntegration"]
+        }
+
         "/chat/get"(controller: "chat") {
             action = [POST: "get"]
         }
@@ -60,6 +64,10 @@ class UrlMappings {
 
         "/users"(controller: "user"){
             action = [GET: "getAll"]
+        }
+
+        "/user/integration"(controller: "user"){
+            action = [GET: "integration"]
         }
 
         "/integration/public"(controller:"chat"){

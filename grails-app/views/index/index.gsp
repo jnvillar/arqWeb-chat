@@ -37,6 +37,10 @@
                 <i class="fa fa-user-plus"></i>
             </div>
 
+            <div class="action-item integration">
+                <i class="fa fa-address-book"></i>
+            </div>
+
         </div>
 
         <div class="sidebar-cards">
@@ -211,6 +215,34 @@
 
         $.post("chat/start", {
                 'users': JSON.stringify(users)
+            },
+            function (response) {
+                var chatTopic = response.chat.topic;
+                conect(chatTopic);
+                loadMessages(response.chat.id);
+                loadChats(response.chat.id);
+            });
+    });
+
+    $("div").on('click', ".contact-integration-card", function () {
+        if ($(this).hasClass("chat-selected")) return;
+        $(".chat-selected").removeClass("chat-selected");
+        $(this).addClass("chat-selected");
+
+        var userId = $(this).data("userid");
+        var userName = $(this).data("username");
+        var userChat = $(this).data("userchat");
+
+        var chat = $(this).data("chat");
+
+        cleanChat();
+
+        $.post("chat/integration/start", {
+                'user': "${session.user.name}",
+                'userId': userId,
+                'userChat': userChat,
+                'userName': userName,
+                'chat':chat
             },
             function (response) {
                 var chatTopic = response.chat.topic;
@@ -430,6 +462,13 @@
             });
     }
 
+    function loadIntegrationContacts(){
+        $.get("/user/integration",
+            function (response) {
+                $(".sidebar-cards").html(response);
+            });
+    }
+
     $(".chats").click(function () {
         loadChats(-1);
     });
@@ -452,6 +491,12 @@
     $(".groups").click(function () {
         $(".action-item").removeClass("action-selected");
         $(".groups").addClass("action-selected");
+    });
+
+    $(".integration").click(function () {
+        $(".action-item").removeClass("action-selected");
+        $(".integration").addClass("action-selected");
+        loadIntegrationContacts()
     });
 
     $(document).on('change', '.select-option', function () {

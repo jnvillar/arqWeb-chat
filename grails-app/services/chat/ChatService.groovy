@@ -73,30 +73,36 @@ class ChatService {
 
         def externalUsers = message.chat.members.findAll { it.type == UserType.INTEGRATION }
 
-        if (message.chat.type == ChatType.PRIVATE) {
+        if (message.chat.type == ChatType.PRIVATE && message.user.type != UserType.INTEGRATION) {
+
+            println "mandando mensaje privado"
+
             externalUsers.each { User user ->
-                apiClient.post("https://awebchat-integration.herokuapp.com/send", [
-                        "from"      : message.user.name,
+
+                def msg = [
+                        "from"      : ["id": message.user.id, "name": message.user.name],
                         "msg"       : message.message,
-                        "to"        : user.name,
+                        "to"        : ["id": user.integrationId, "name": user.name],
                         "attachment": null,
                         "sourceApp" : "grails",
-                        "targetApp" : user.name.replaceAll(/.*[(]/, "").replace(")", "")]
-                )
+                        "targetApp" : user.integrationApp]
+
+                println msg
+
+                apiClient.post("https://awebchat-integration.herokuapp.com/private/send", msg)
                 Logger.logMessageToUser(message, user)
             }
-        } else {
-            externalUsers.each { User user ->
-                apiClient.post("https://awebchat-integration.herokuapp.com/send", [
-                        "from"      : message.user.name,
-                        "msg"       : message.message,
-                        "to"        : user.name,
-                        "attachment": null,
-                        "sourceApp" : "grails",
-                        "targetApp" : null]
-                )
-                Logger.logMessageToUser(message, user)
-            }
+
+        } else if (message.user.type != UserType.INTEGRATION) {
+            apiClient.post("https://awebchat-integration.herokuapp.com/public/send", [
+                    "from"      : ["id": message.user.id, "name": message.user.name],
+                    "msg"       : message.message,
+                    "to"        : null,
+                    "attachment": null,
+                    "sourceApp" : "grails",
+                    "targetApp" : null]
+            )
+            Logger.logMessageToChat(message)
         }
     }
 }

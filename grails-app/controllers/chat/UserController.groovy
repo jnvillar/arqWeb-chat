@@ -45,4 +45,10 @@ class UserController {
         def response = [status: 200]
         render response as JSON
     }
+
+    def integration(){
+        def users = userService.getIntegrationUsers()
+        users = users.findAll{it["id"] != "grails"}
+        render(template: "contactIntegrationPreview", model: [users: users])
+    }
 }
