@@ -107,8 +107,8 @@ environments:
             dbCreate: update
             url: 'jdbc:mysql://k9xdebw4k3zynl4u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zj2wti0swrdwg6vj'
             properties:
-                minIdle: 1
-                maxIdle: 5
+                minIdle: 2
+                maxIdle: 2
     test:
         dataSource:
             username: root

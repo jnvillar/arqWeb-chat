@@ -73,6 +73,9 @@ class UserService {
 
     def getIntegrationUsers() {
         def response = apiClient.get("https://awebchat-integration.herokuapp.com/contacts")
+        println response
+        println response.body
+        println response.json
         return response.body
     }
 
