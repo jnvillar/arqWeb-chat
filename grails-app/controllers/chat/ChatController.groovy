@@ -69,7 +69,7 @@ class ChatController {
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
-        User user = userService.getIntegrationUser(params)
+        User user = userService.getIntegrationUser(data)
         Chat chat = chatService.getPublicGroup()
         Message message = chatService.addMessage(chat, user, data.msg as String, "null" , data.attachmentType as String)
 
@@ -85,7 +85,7 @@ class ChatController {
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
-        User userFrom = userService.getIntegrationUser(params)
+        User userFrom = userService.getIntegrationUser(data)
         User userTo = User.findById(data.to.id)
         Chat chat = chatService.getByUsers([userFrom, userTo])
         Message message = chatService.addMessage(chat, userFrom, data.msg as String, data.attachment as String, data.attachmentType as String)
