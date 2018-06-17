@@ -11,6 +11,9 @@ class ChatService {
     SimpMessageSendingOperations brokerMessagingTemplate
     ApiClient apiClient = new ApiClient()
 
+    String publicIntegrationUrl = "https://awebchat-integration.herokuapp.com/public/send"
+    String privateIntegrationUrl = "https://awebchat-integration.herokuapp.com/private/send"
+
 
     def getAllByUser(User user) {
         List<Chat> chats = Chat.findAll().findAll { it.members.contains(user) }
@@ -74,9 +77,6 @@ class ChatService {
         def externalUsers = message.chat.members.findAll { it.type == UserType.INTEGRATION }
 
         if (message.chat.type == ChatType.PRIVATE && message.user.type != UserType.INTEGRATION) {
-
-            println "mandando mensaje privado"
-
             externalUsers.each { User user ->
 
                 def msg = [
@@ -87,22 +87,24 @@ class ChatService {
                         "sourceApp" : "grails",
                         "targetApp" : user.integrationApp]
 
-                println msg
 
-                apiClient.post("https://awebchat-integration.herokuapp.com/private/send", msg)
-                Logger.logMessageToUser(message, user)
+                apiClient.post(privateIntegrationUrl, msg)
+                Logger.logPost(privateIntegrationUrl, msg)
+                Logger.sendIntegrationPrivateMessage(message, user)
             }
 
-        } else if (message.user.type != UserType.INTEGRATION) {
-            apiClient.post("https://awebchat-integration.herokuapp.com/public/send", [
+        } else {
+            def msg = [
                     "from"      : ["id": message.user.id, "name": message.user.name],
                     "msg"       : message.message,
                     "to"        : null,
                     "attachment": null,
                     "sourceApp" : "grails",
                     "targetApp" : null]
-            )
-            Logger.logMessageToChat(message)
+
+            apiClient.post(publicIntegrationUrl, msg)
+            Logger.logPost(publicIntegrationUrl, msg)
+            Logger.sendIntegrationPublicMessage(message)
         }
     }
 }
