@@ -81,7 +81,7 @@ class ChatController {
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
         User userFrom = userService.getIntegrationUser(params)
-        User userTo = User.findByNameAndType(data.to as String, UserType.LOCAL)
+        User userTo = User.findById(data.to.id)
         Chat chat = chatService.getByUsers([userFrom, userTo])
         Message message = chatService.addMessage(chat, userFrom, data.msg as String, data.attachment as String, data.attachmentType as String)
 
