@@ -25,4 +25,16 @@ class Logger {
         println "Post to ${url}"
         println "Body ${body}"
     }
+
+    static publicMessageArrival(params){
+        println "A public msg has arrive"
+        println params
+    }
+
+    static privateMessageArrival(params){
+        println "A private msg has arrive"
+        println params
+    }
+
+
 }

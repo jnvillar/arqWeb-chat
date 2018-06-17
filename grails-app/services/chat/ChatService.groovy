@@ -11,7 +11,7 @@ class ChatService {
     SimpMessageSendingOperations brokerMessagingTemplate
     ApiClient apiClient = new ApiClient()
 
-    String publicIntegrationUrl = "https://awebchat-integration.herokuapp.com/public/send"
+    String publicIntegrationUrl =  "https://awebchat-integration.herokuapp.com/public/send"
     String privateIntegrationUrl = "https://awebchat-integration.herokuapp.com/private/send"
 
 

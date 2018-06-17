@@ -1,6 +1,7 @@
 package chat
 
 import grails.converters.JSON
+import login.Logger
 import user.UserType
 
 
@@ -63,6 +64,8 @@ class ChatController {
     }
 
     def publicIntegration(){
+        Logger.publicMessageArrival(request.JSON)
+
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
@@ -77,6 +80,8 @@ class ChatController {
     }
 
     def privateIntegration(){
+        Logger.privateMessageArrival(request.JSON)
+
         def data = request.JSON
         if(data.sourceApp == "grails"){ def res =  [status: 200]; render res as JSON; return}
 
