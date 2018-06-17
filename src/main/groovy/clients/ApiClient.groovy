@@ -8,8 +8,9 @@ class ApiClient {
 
     def post(String url, Map form) {
         def response = rest.post(url) {
+            accept("application/json")
+            contentType("application/json")
             body (form as JSON)
-            header "Content-Type", "application/json"
         }
         response.json
     }
