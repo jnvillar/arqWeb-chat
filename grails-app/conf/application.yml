@@ -98,8 +98,8 @@ dataSource:
     pooled: true
     jmxExport: true
     driverClassName: com.mysql.jdbc.Driver
-    username: k9xdebw4k3zynl4u
-    password: cbetxkdyhwsb
+    username: hlr3n774t5lm7fy5
+    password: nr538o6q1w4opube
 
 environments:
     development:
