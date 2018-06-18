@@ -15,7 +15,7 @@ class ApiClient {
         def response = rest.post(url) {
             accept("application/json")
             contentType("application/json")
-            body(jsonObject)
+            json(jsonObject)
         }
 
         println "post response"
