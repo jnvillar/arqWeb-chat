@@ -70,11 +70,11 @@ class UrlMappings {
             action = [GET: "integration"]
         }
 
-        "/integration/public"(controller:"chat"){
+        "/integrate/public"(controller:"chat"){
             action = [POST: "publicIntegration"]
         }
 
-        "/integration/private"(controller:"chat"){
+        "/integrate/private"(controller:"chat"){
             action = [POST: "privateIntegration"]
         }
 
