@@ -8,7 +8,7 @@ class ApiClient {
     def post(String url, Map params) {
         def response = rest.post(url) {
             accept("application/json")
-            contentType("application/x-www-form-urlencoded")
+            contentType("application/json")
             body(params)
         }
 
