@@ -14,7 +14,6 @@ class User {
     int age
     String nickName
     UserType type
-
     
     String integrationApp
     String integrationId
