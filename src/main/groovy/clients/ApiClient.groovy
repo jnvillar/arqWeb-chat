@@ -1,7 +1,7 @@
 package clients
 
+import grails.converters.JSON
 import grails.plugins.rest.client.RestBuilder
-import org.grails.web.json.JSONObject
 
 class ApiClient {
     def rest = new RestBuilder(connectTimeout: 10000, readTimeout: 20000)
@@ -9,13 +9,10 @@ class ApiClient {
     def post(String url, Map params) {
         println "post to ${url}"
 
-        JSONObject jsonObject = new JSONObject()
-        params.each {jsonObject.put(it.key, it.value)}
-
         def response = rest.post(url) {
             accept("application/json")
             contentType("application/json")
-            json(jsonObject)
+            body(params as JSON)
         }
 
         println "post response"
