@@ -9,10 +9,13 @@ class ApiClient {
     def post(String url, Map params) {
         println "post to ${url}"
 
+        JSONObject jsonObject = new JSONObject()
+        params.each {jsonObject.put(it.key, it.value)}
+
         def response = rest.post(url) {
             accept("application/json")
             contentType("application/json")
-            body(params)
+            body(jsonObject)
         }
 
         println "post response"
@@ -22,7 +25,7 @@ class ApiClient {
     
     def get(String url, Map params = [:]) {
         println "get to ${url}"
-        
+
         def response = rest.get(url) {
             accept("application/json")
         }
