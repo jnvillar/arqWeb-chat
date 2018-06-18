@@ -93,7 +93,7 @@ class ChatService {
                 Logger.sendIntegrationPrivateMessage(message, user)
             }
 
-        } else {
+        } else if(message.user.type != UserType.INTEGRATION){
             def msg = [
                     "from"      : ["id": message.user.id, "name": message.user.name],
                     "msg"       : message.message,
