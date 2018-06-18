@@ -7,10 +7,11 @@ class ApiClient {
     def rest = new RestBuilder(connectTimeout: 10000, readTimeout: 20000)
 
     def post(String url, Map form) {
+
         def response = rest.post(url) {
             accept("application/json")
             contentType("application/json")
-            body (form as JSON)
+            body (form)
         }
         response.json
     }
