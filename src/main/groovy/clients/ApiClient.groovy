@@ -2,15 +2,28 @@ package clients
 
 import grails.converters.JSON
 import grails.plugins.rest.client.RestBuilder
+import org.grails.web.json.JSONObject
 
 class ApiClient {
     def rest = new RestBuilder(connectTimeout: 10000, readTimeout: 20000)
 
     def post(String url, Map form) {
 
-        def response = rest.post(url) {
-            body (form as JSON)
+        JSONObject jsonObject = new JSONObject()
+
+        form.each {
+            jsonObject.put(it.key, it.value)
         }
+
+        def response = rest.post(url) {
+            contentType "application/json"
+            json jsonObject
+
+        }
+
+        println "post response"
+        println response.json
+
         response.json
     }
     
@@ -18,6 +31,10 @@ class ApiClient {
         def response = rest.get(url) {
             accept("application/json")
         }
+
+        println "get response"
+        println response.json
+
         response.json
     }
 }
