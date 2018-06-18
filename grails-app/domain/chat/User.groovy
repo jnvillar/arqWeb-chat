@@ -22,7 +22,7 @@ class User {
 
     static constraints = {
         contacts (lazy: false)
-        name(unique: true)
+        name(nullable: true)
         topic(nullable: true, unique: true)
         city(nullable: false)
         integrationApp(nullable: true)
