@@ -7,15 +7,12 @@ class ApiClient {
     def rest = new RestBuilder(connectTimeout: 10000, readTimeout: 20000)
 
     def post(String url, Map params) {
-
-        JSONObject json = new JSONObject()
-
-        params.each { json.put(it.key, it.value) }
+        println "post to ${url}"
 
         def response = rest.post(url) {
             accept("application/json")
             contentType("application/json")
-            body(json)
+            body(params)
         }
 
         println "post response"
@@ -24,6 +21,8 @@ class ApiClient {
     }
     
     def get(String url, Map params = [:]) {
+        println "get to ${url}"
+        
         def response = rest.get(url) {
             accept("application/json")
         }
